@@ -8,6 +8,7 @@ import (
 	"net/http"
 )
 
+// @wire:Handler
 func NewUserHandler(handler *Handler,
 	userService service.UserService,
 ) *UserHandler {

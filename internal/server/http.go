@@ -8,6 +8,7 @@ import (
 	"github.com/go-nunu/nunu-layout-basic/pkg/log"
 )
 
+// @wire:Server
 func NewServerHTTP(
 	logger *log.Logger,
 	userHandler *handler.UserHandler,

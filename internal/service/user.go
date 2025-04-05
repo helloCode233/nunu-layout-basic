@@ -14,6 +14,7 @@ type userService struct {
 	userRepository repository.UserRepository
 }
 
+// @wire:Service
 func NewUserService(service *Service, userRepository repository.UserRepository) UserService {
 	return &userService{
 		Service:        service,

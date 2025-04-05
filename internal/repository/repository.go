@@ -11,6 +11,7 @@ type Repository struct {
 	logger *log.Logger
 }
 
+// @wire:Repository
 func NewRepository(logger *log.Logger, db *gorm.DB) *Repository {
 	return &Repository{
 		db: db,
@@ -18,6 +19,8 @@ func NewRepository(logger *log.Logger, db *gorm.DB) *Repository {
 		logger: logger,
 	}
 }
+
+// @wire:Repository
 func NewDb() *gorm.DB {
 	// TODO: init db
 	//db, err := gorm.Open(mysql.Open(conf.GetString("data.mysql.user")), &gorm.Config{})

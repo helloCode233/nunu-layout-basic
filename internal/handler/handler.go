@@ -8,6 +8,7 @@ type Handler struct {
 	logger *log.Logger
 }
 
+// @wire:Handler
 func NewHandler(logger *log.Logger) *Handler {
 	return &Handler{
 		logger: logger,

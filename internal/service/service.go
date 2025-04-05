@@ -6,6 +6,7 @@ type Service struct {
 	logger *log.Logger
 }
 
+// @wire:Service
 func NewService(logger *log.Logger) *Service {
 	return &Service{
 		logger: logger,

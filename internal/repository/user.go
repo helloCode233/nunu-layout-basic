@@ -11,6 +11,7 @@ type userRepository struct {
 	*Repository
 }
 
+// @wire:Repository
 func NewUserRepository(repository *Repository) UserRepository {
 	return &userRepository{
 		Repository: repository,
