@@ -1,7 +1,7 @@
 app:
   env: 'local'
   port: 9000
-  app_name: 'gin-app'
+  app_name: 'github.com/go-nunu/nunu-layout-basic'
   app_url: 'http://localhost'
 log:
   level: 'info'
