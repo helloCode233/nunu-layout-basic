@@ -10,11 +10,11 @@ import (
 func NewConfig() *viper.Viper {
 	envConf := os.Getenv("APP_CONF")
 	if envConf == "" {
-		flag.StringVar(&envConf, "conf", "config/local.yml", "config path, eg: -conf config/local.yml")
+		flag.StringVar(&envConf, "conf", "config/local.yaml", "config path, eg: -conf config/local.yaml")
 		flag.Parse()
 	}
 	if envConf == "" {
-		envConf = "config/local.yml"
+		envConf = "config/local.yaml"
 	}
 	fmt.Println("load conf file:", envConf)
 	return getConfig(envConf)
