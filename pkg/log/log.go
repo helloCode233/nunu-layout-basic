@@ -2,7 +2,7 @@ package log
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
+	"github.com/go-nunu/nunu-layout-basic/pkg/config"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
@@ -16,15 +16,15 @@ type Logger struct {
 	*zap.Logger
 }
 
-func NewLog(conf *viper.Viper) *Logger {
+func NewLog(conf *config.Configuration) *Logger {
 	return initZap(conf)
 }
 
-func initZap(conf *viper.Viper) *Logger {
+func initZap(conf *config.Configuration) *Logger {
 	// 日志地址 "out.log" 自定义
-	lp := conf.GetString("log.log_file_name")
+	lp := conf.Log.Filename
 	// 日志级别 DEBUG,ERROR, INFO
-	lv := conf.GetString("log.log_level")
+	lv := conf.Log.Level
 	var level zapcore.Level
 	//debug<info<warn<error<fatal<panic
 	switch lv {
@@ -40,15 +40,15 @@ func initZap(conf *viper.Viper) *Logger {
 		level = zap.InfoLevel
 	}
 	hook := lumberjack.Logger{
-		Filename:   lp,                             // 日志文件路径
-		MaxSize:    conf.GetInt("log.max_size"),    // 每个日志文件保存的最大尺寸 单位：M
-		MaxBackups: conf.GetInt("log.max_backups"), // 日志文件最多保存多少个备份
-		MaxAge:     conf.GetInt("log.max_age"),     // 文件最多保存多少天
-		Compress:   conf.GetBool("log.compress"),   // 是否压缩
+		Filename:   lp,                  // 日志文件路径
+		MaxSize:    conf.Log.MaxSize,    // 每个日志文件保存的最大尺寸 单位：M
+		MaxBackups: conf.Log.MaxBackups, // 日志文件最多保存多少个备份
+		MaxAge:     conf.Log.MaxAge,     // 文件最多保存多少天
+		Compress:   conf.Log.Compress,   // 是否压缩
 	}
 
 	var encoder zapcore.Encoder
-	if conf.GetString("log.encoding") == "console" {
+	if conf.Log.Encoding == "console" {
 		encoder = zapcore.NewConsoleEncoder(zapcore.EncoderConfig{
 			TimeKey:        "ts",
 			LevelKey:       "level",
@@ -83,7 +83,7 @@ func initZap(conf *viper.Viper) *Logger {
 		zapcore.NewMultiWriteSyncer(zapcore.AddSync(os.Stdout), zapcore.AddSync(&hook)), // 打印到控制台和文件
 		level, // 日志级别
 	)
-	if conf.GetString("env") != "prod" {
+	if conf.App.Env != "prod" {
 		return &Logger{zap.New(core, zap.Development(), zap.AddCaller(), zap.AddStacktrace(zap.ErrorLevel))}
 	}
 	return &Logger{zap.New(core, zap.AddCaller(), zap.AddStacktrace(zap.ErrorLevel))}

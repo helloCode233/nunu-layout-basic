@@ -14,7 +14,9 @@ import (
 	"github.com/spf13/viper"
 )
 
-var ServerSet = wire.NewSet(server.NewServerHTTP)
+var ServerSet = wire.NewSet(
+	server.NewServerHTTP,
+)
 
 var RepositorySet = wire.NewSet(
 	repository.NewDb,

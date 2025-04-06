@@ -12,14 +12,14 @@ import (
 	"github.com/go-nunu/nunu-layout-basic/internal/repository"
 	"github.com/go-nunu/nunu-layout-basic/internal/server"
 	"github.com/go-nunu/nunu-layout-basic/internal/service"
+	"github.com/go-nunu/nunu-layout-basic/pkg/config"
 	"github.com/go-nunu/nunu-layout-basic/pkg/log"
 	"github.com/google/wire"
-	"github.com/spf13/viper"
 )
 
 // Injectors from wire.go:
 
-func NewWire(viperViper *viper.Viper, logger *log.Logger) (*gin.Engine, func(), error) {
+func NewWire(config *config.Configuration, logger *log.Logger) (*gin.Engine, func(), error) {
 	handlerHandler := handler.NewHandler(logger)
 	serviceService := service.NewService(logger)
 	db := repository.NewDb()
