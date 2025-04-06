@@ -1,7 +1,7 @@
 app:
   env: 'local'
   port: 9000
-  app_name: 'github.com/go-nunu/nunu-layout-basic'
+  app_name: 'projectName'
   app_url: 'http://localhost'
 log:
   level: 'info'
@@ -16,7 +16,7 @@ database:
  driver: 'mysql'
  host: '127.0.0.1'
  port: 3306
- database: 'go-test'
+ database: 'default'
  table_prefix: ''
  username: 'root'
  password: 'admin'

@@ -6,7 +6,9 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
+	"io/fs"
 	"os"
+	"path/filepath"
 	"time"
 )
 
@@ -21,8 +23,9 @@ func NewLog(conf *config.Configuration) *Logger {
 }
 
 func initZap(conf *config.Configuration) *Logger {
+	os.MkdirAll(filepath.Join(".", conf.Log.RootDir), fs.ModePerm)
 	// 日志地址 "out.log" 自定义
-	lp := conf.Log.Filename
+	lp := filepath.Join(conf.Log.RootDir, conf.Log.Filename)
 	// 日志级别 DEBUG,ERROR, INFO
 	lv := conf.Log.Level
 	var level zapcore.Level
