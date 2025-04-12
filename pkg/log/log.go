@@ -18,6 +18,7 @@ type Logger struct {
 	*zap.Logger
 }
 
+// @wire:Log
 func NewLog(conf *config.Configuration) *Logger {
 	return initZap(conf)
 }
