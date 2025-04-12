@@ -19,7 +19,7 @@ import (
 
 // Injectors from wire.go:
 
-func NewWire(config *config.Configuration, logger *log.Logger) (*gin.Engine, func(), error) {
+func NewWire(configuration *config.Configuration, logger *log.Logger) (*gin.Engine, func(), error) {
 	handlerHandler := handler.NewHandler(logger)
 	serviceService := service.NewService(logger)
 	db := repository.NewDb()

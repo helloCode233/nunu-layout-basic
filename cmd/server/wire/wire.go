@@ -9,9 +9,9 @@ import (
 	"github.com/go-nunu/nunu-layout-basic/internal/repository"
 	"github.com/go-nunu/nunu-layout-basic/internal/server"
 	"github.com/go-nunu/nunu-layout-basic/internal/service"
+	"github.com/go-nunu/nunu-layout-basic/pkg/config"
 	"github.com/go-nunu/nunu-layout-basic/pkg/log"
 	"github.com/google/wire"
-	"github.com/spf13/viper"
 )
 
 var ServerSet = wire.NewSet(
@@ -34,7 +34,7 @@ var HandlerSet = wire.NewSet(
 	handler.NewUserHandler,
 )
 
-func NewWire(*viper.Viper, *log.Logger) (*gin.Engine, func(), error) {
+func NewWire(*config.Configuration, *log.Logger) (*gin.Engine, func(), error) {
 	panic(wire.Build(
 		ServerSet,
 		RepositorySet,
