@@ -1,0 +1,28 @@
+app:
+  env: 'prod'
+  port: 9000
+  app_name: 'projectName'
+  app_url: 'http://localhost'
+log:
+  level: 'info'
+  root_dir: 'storage/logs'
+  filename: 'app.log'
+  max_backups: 3
+  max_size: 500
+  max_age: 28
+  compress: true
+  encoding: console
+database:
+ driver: 'mysql'
+ host: '127.0.0.1'
+ port: 3306
+ database: 'default'
+ table_prefix: ''
+ username: 'root'
+ password: 'admin'
+ charset: 'utf8mb4'
+ max_idle_conns: 10
+ max_open_conns: 100
+ log_mode: 'info'
+ enable_file_log_writer: true
+log_filename: 'sql.log'

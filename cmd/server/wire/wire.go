@@ -7,15 +7,15 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-nunu/nunu-layout-basic/internal/handler"
 	"github.com/go-nunu/nunu-layout-basic/internal/repository"
-	"github.com/go-nunu/nunu-layout-basic/internal/server"
+	"github.com/go-nunu/nunu-layout-basic/internal/router"
 	"github.com/go-nunu/nunu-layout-basic/internal/service"
 	"github.com/go-nunu/nunu-layout-basic/pkg/config"
 	"github.com/go-nunu/nunu-layout-basic/pkg/log"
 	"github.com/google/wire"
 )
 
-var ServerSet = wire.NewSet(
-	server.NewServerHTTP,
+var RouterSet = wire.NewSet(
+	router.NewServerHTTP,
 )
 
 var RepositorySet = wire.NewSet(
@@ -38,7 +38,7 @@ func NewWire(*config.Configuration, *log.Logger) (*gin.Engine, func(), error) {
 	panic(wire.Build(
 		ServerSet,
 		RepositorySet,
-		ServiceSet,
+		RouterSet,
 		HandlerSet,
 	))
 }

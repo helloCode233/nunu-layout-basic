@@ -13,7 +13,7 @@ func main() {
 	conf := config.NewConfig()
 	logger := log.NewLog(conf)
 
-	logger.Info("server start", zap.String("host", "http://127.0.0.1:"+conf.App.Port))
+	logger.Info("router start", zap.String("host", "http://127.0.0.1:"+conf.App.Port))
 
 	app, cleanup, err := wire.NewWire(conf, logger)
 	if err != nil {

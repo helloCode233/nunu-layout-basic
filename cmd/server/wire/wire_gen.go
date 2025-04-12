@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-nunu/nunu-layout-basic/internal/handler"
 	"github.com/go-nunu/nunu-layout-basic/internal/repository"
-	"github.com/go-nunu/nunu-layout-basic/internal/server"
+	"github.com/go-nunu/nunu-layout-basic/internal/router"
 	"github.com/go-nunu/nunu-layout-basic/internal/service"
 	"github.com/go-nunu/nunu-layout-basic/pkg/config"
 	"github.com/go-nunu/nunu-layout-basic/pkg/log"
@@ -27,14 +27,14 @@ func NewWire(configuration *config.Configuration, logger *log.Logger) (*gin.Engi
 	userRepository := repository.NewUserRepository(repositoryRepository)
 	userService := service.NewUserService(serviceService, userRepository)
 	userHandler := handler.NewUserHandler(handlerHandler, userService)
-	engine := server.NewServerHTTP(logger, userHandler)
+	engine := router.NewServerHTTP(logger, userHandler)
 	return engine, func() {
 	}, nil
 }
 
 // wire.go:
 
-var ServerSet = wire.NewSet(server.NewServerHTTP)
+var ServerSet = wire.NewSet(router.NewServerHTTP)
 
 var RepositorySet = wire.NewSet(repository.NewDb, repository.NewRepository, repository.NewUserRepository)
 
