@@ -38,9 +38,9 @@ type Configuration struct {
 	//Storage  Storage  `mapstructure:"storage" json:"storage" yaml:"storage"`
 }
 
-func GetEnv() string {
-	return ViperRead(filepath.Join("config", "env.yaml")).App.Env
-}
+//func GetEnv() string {
+//	return ViperRead(filepath.Join("config", "env.yaml")).App.Env
+//}
 
 func NewConfig() *Configuration {
 	env := ViperRead(filepath.Join("config", "env.yaml")).App.Env

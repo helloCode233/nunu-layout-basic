@@ -19,7 +19,7 @@ var RouterSet = wire.NewSet(
 )
 
 var RepositorySet = wire.NewSet(
-	repository.NewDb,
+
 	repository.NewRepository,
 	repository.NewUserRepository,
 )
@@ -36,7 +36,7 @@ var HandlerSet = wire.NewSet(
 
 func NewWire(*config.Configuration, *log.Logger) (*gin.Engine, func(), error) {
 	panic(wire.Build(
-		ServerSet,
+		ServiceSet,
 		RepositorySet,
 		RouterSet,
 		HandlerSet,

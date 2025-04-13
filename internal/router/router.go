@@ -13,14 +13,16 @@ import (
 // @wire:Server
 func NewServerHTTP(
 	logger *log.Logger,
+	configuration config.Configuration,
 	userHandler *handler.UserHandler,
 ) *gin.Engine {
-	switch config.GetEnv() {
+	switch configuration.App.Env {
 	case "prod":
 		gin.SetMode(gin.ReleaseMode)
 	case "test":
 		gin.SetMode(gin.TestMode)
 	}
+	logger.Info("yaml start with" + configuration.App.Env)
 	router := gin.Default()
 	router.Use(
 		middleware.CORS(),
