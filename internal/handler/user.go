@@ -3,9 +3,8 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-nunu/nunu-layout-basic/internal/service"
-	"github.com/go-nunu/nunu-layout-basic/pkg/helper/resp"
+	"github.com/go-nunu/nunu-layout-basic/pkg/helper/result"
 	"go.uber.org/zap"
-	"net/http"
 )
 
 // @wire:Handler
@@ -28,19 +27,20 @@ func (h *UserHandler) GetUserById(ctx *gin.Context) {
 		Id int64 `form:"id" binding:"required"`
 	}
 	if err := ctx.ShouldBind(&params); err != nil {
-		resp.HandleError(ctx, http.StatusBadRequest, 1, err.Error(), nil)
+		result.FailByErr(ctx, err)
 		return
 	}
 
 	user, err := h.userService.GetUserById(params.Id)
 	h.logger.Info("GetUserByID", zap.Any("user", user))
 	if err != nil {
-		resp.HandleError(ctx, http.StatusInternalServerError, 1, err.Error(), nil)
+		result.FailByErr(ctx, err)
 		return
 	}
-	resp.HandleSuccess(ctx, user)
+	result.Success(ctx, user)
+	//resp.HandleSuccess(ctx, user)
 }
 
 func (h *UserHandler) UpdateUser(ctx *gin.Context) {
-	resp.HandleSuccess(ctx, nil)
+	result.Success(ctx, "")
 }
